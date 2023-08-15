@@ -6,6 +6,7 @@ function App() {
   const API = "https://reqres.in/api/users";
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     fetch(API)
@@ -20,9 +21,18 @@ function App() {
       .finally(() => setIsLoading(false));
   }, []);
 
+  const onChangeSearchValue = (e) => {
+    setSearchValue(e.target.value);
+  };
+
   return (
     <div className="App">
-      <Users items={users} isLoading={isLoading} />
+      <Users
+        onChangeSearchValue={onChangeSearchValue}
+        searchValue={searchValue}
+        items={users}
+        isLoading={isLoading}
+      />
       {/* <Success /> */}
     </div>
   );
