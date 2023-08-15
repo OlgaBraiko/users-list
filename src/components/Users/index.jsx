@@ -9,8 +9,10 @@ const Users = ({
   onChangeSearchValue,
   invites,
   handleInvite,
+  handleSendInvites,
 }) => {
   console.log(searchValue);
+
   return (
     <>
       <div className="search">
@@ -56,7 +58,9 @@ const Users = ({
             ))}
         </ul>
       )}
-      <button className="send-invite-btn">Отправить приглашение</button>
+      <button onClick={handleSendInvites} className="send-invite-btn">
+        Отправить приглашение
+      </button>
     </>
   );
 };

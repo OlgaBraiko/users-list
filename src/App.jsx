@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Users from "./components/Users";
+import Success from "./components/Success";
 
 function App() {
   const API = "https://reqres.in/api/users";
@@ -8,6 +9,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [searchValue, setSearchValue] = useState("");
   const [invites, setInvites] = useState([]);
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     fetch(API)
@@ -35,8 +37,14 @@ function App() {
     }
   };
 
+  const handleSendInvites = () => {
+    setSuccess(true);
+  };
+
   return (
     <div className="App">
+      {success ? <Success /> : <Users />}
+
       <Users
         onChangeSearchValue={onChangeSearchValue}
         searchValue={searchValue}
@@ -44,8 +52,9 @@ function App() {
         isLoading={isLoading}
         invites={invites}
         handleInvite={handleInvite}
+        handleSendInvites={handleSendInvites}
       />
-      {/* <Success /> */}
+      <Success />
     </div>
   );
 }
