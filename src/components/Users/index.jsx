@@ -25,9 +25,23 @@ const Users = ({ items, isLoading, searchValue, onChangeSearchValue }) => {
         </div>
       ) : (
         <ul className="users-list">
-          {items.map((obj) => (
-            <User key={obj.id} {...obj} />
-          ))}
+          {items
+            .filter((obj) => {
+              const fullName = (obj.first_name + obj.last_name).toLowerCase();
+
+              //если в имя и фамилию входит то что входит в searchValue
+              if (
+                fullName.includes(searchValue.toLowerCase()) ||
+                obj.email.toLowerCase().includes(searchValue.toLowerCase())
+              ) {
+                return true;
+              }
+
+              return true;
+            })
+            .map((obj) => (
+              <User key={obj.id} {...obj} />
+            ))}
         </ul>
       )}
       <button className="send-invite-btn">Отправить приглашение</button>
