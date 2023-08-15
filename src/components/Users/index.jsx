@@ -2,7 +2,14 @@ import React from "react";
 import Skeleton from "./Skeleton";
 import User from "./User";
 
-const Users = ({ items, isLoading, searchValue, onChangeSearchValue }) => {
+const Users = ({
+  items,
+  isLoading,
+  searchValue,
+  onChangeSearchValue,
+  invites,
+  handleInvite,
+}) => {
   console.log(searchValue);
   return (
     <>
@@ -40,7 +47,12 @@ const Users = ({ items, isLoading, searchValue, onChangeSearchValue }) => {
               return true;
             })
             .map((obj) => (
-              <User key={obj.id} {...obj} />
+              <User
+                handleInvite={handleInvite}
+                isInvited={invites.input(obj.id)}
+                key={obj.id}
+                {...obj}
+              />
             ))}
         </ul>
       )}

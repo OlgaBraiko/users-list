@@ -1,6 +1,14 @@
 import React from "react";
 
-const User = ({ id, email, firs_name, last_name, avatar }) => (
+const User = ({
+  id,
+  email,
+  firs_name,
+  last_name,
+  avatar,
+  handleInvite,
+  isInvited,
+}) => (
   <li>
     <div>
       <img className="avatar" src={avatar} alt="User" />
@@ -17,7 +25,13 @@ const User = ({ id, email, firs_name, last_name, avatar }) => (
         </p>
       </div>
     </div>
-    <img className="action" src="/assets/plus.svg" alt="Action" />
+    <img
+      onClick={() => handleInvite(id)}
+      className="action"
+      src={`"/assets/${isInvited ? "minus" : "plus"}.svg"`}
+      //   приглашен юзер или нет
+      alt="Action"
+    />
   </li>
 );
 
