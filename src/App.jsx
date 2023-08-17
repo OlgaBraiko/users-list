@@ -33,7 +33,7 @@ function App() {
     if (invites.includes(id)) {
       setInvites((prev) => prev.filter((_id) => _id !== id));
     } else {
-      setInvites((prev) => [...prev.id]);
+      setInvites((prev) => [...prev, id]);
     }
   };
 
@@ -43,18 +43,19 @@ function App() {
 
   return (
     <div className="App">
-      {success ? <Success /> : <Users />}
-
-      <Users
-        onChangeSearchValue={onChangeSearchValue}
-        searchValue={searchValue}
-        items={users}
-        isLoading={isLoading}
-        invites={invites}
-        handleInvite={handleInvite}
-        handleSendInvites={handleSendInvites}
-      />
-      <Success />
+      {success ? (
+        <Success count={invites.length} />
+      ) : (
+        <Users
+          onChangeSearchValue={onChangeSearchValue}
+          searchValue={searchValue}
+          items={users}
+          isLoading={isLoading}
+          invites={invites}
+          handleInvite={handleInvite}
+          handleSendInvites={handleSendInvites}
+        />
+      )}
     </div>
   );
 }

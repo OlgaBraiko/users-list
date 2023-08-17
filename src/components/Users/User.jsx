@@ -1,5 +1,3 @@
-import React from "react";
-
 const User = ({
   id,
   email,
@@ -28,7 +26,7 @@ const User = ({
     <img
       onClick={() => handleInvite(id)}
       className="action"
-      src={`"/assets/${isInvited ? "minus" : "plus"}.svg"`}
+      src={`../public/${isInvited ? "minus" : "plus"}.svg`}
       //   приглашен юзер или нет
       alt="Action"
     />

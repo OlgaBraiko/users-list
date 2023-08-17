@@ -1,4 +1,3 @@
-import React from "react";
 import Skeleton from "./Skeleton";
 import User from "./User";
 
@@ -29,8 +28,6 @@ const Users = ({
       {isLoading ? (
         <div className="skeleton-list">
           <Skeleton />
-          <Skeleton />
-          <Skeleton />
         </div>
       ) : (
         <ul className="users-list">
@@ -39,28 +36,27 @@ const Users = ({
               const fullName = (obj.first_name + obj.last_name).toLowerCase();
 
               //если в имя и фамилию входит то что входит в searchValue
-              if (
+
+              return (
                 fullName.includes(searchValue.toLowerCase()) ||
                 obj.email.toLowerCase().includes(searchValue.toLowerCase())
-              ) {
-                return true;
-              }
-
-              return true;
+              );
             })
             .map((obj) => (
               <User
                 handleInvite={handleInvite}
-                isInvited={invites.input(obj.id)}
+                isInvited={invites.includes(obj.id)}
                 key={obj.id}
                 {...obj}
               />
             ))}
         </ul>
       )}
-      <button onClick={handleSendInvites} className="send-invite-btn">
-        Отправить приглашение
-      </button>
+      {invites > 0 && (
+        <button onClick={handleSendInvites} className="send-invite-btn">
+          Отправить приглашение
+        </button>
+      )}
     </>
   );
 };
